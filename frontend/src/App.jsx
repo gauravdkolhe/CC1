@@ -112,7 +112,10 @@ function App() {
       <tbody>{rows.map((s) => (
         <tr key={s._id}>
           <td><span className="strong">{s.name}</span><span className="sub">{s.email}</span></td>
-          <td>{s.studentId}</td><td>{s.department?.name || '—'}</td><td>{s.section || '—'}</td><td>{s.semester}</td>
+          <td><span className="badge">{s.studentId}</span></td>
+          <td>{s.department?.name || '—'}</td>
+          <td>{s.section ? <span className="badge">{s.section}</span> : '—'}</td>
+          <td>Sem {s.semester}</td>
           <td className="right"><button className="link" onClick={() => openStudent(s)}>Edit</button><button className="link danger" onClick={() => remove('student', s)}>Delete</button></td>
         </tr>))}
       </tbody>
@@ -122,7 +125,10 @@ function App() {
   return (
     <div className="wrap">
       <header className="top">
-        <span className="brand">CampusDesk</span>
+        <div className="brand-wrap">
+          <span className="brand-icon">🎓</span>
+          <span className="brand">CampusDesk</span>
+        </div>
         <nav aria-label="Main">
           {pages.map(([key, label]) => (
             <button key={key} className={page === key ? 'on' : ''} aria-current={page === key ? 'page' : undefined}
